@@ -32,7 +32,10 @@ import pickle
 # for plotting graph in jupyter cell
 # %matplotlib inline
 
-df = pd.read_csv("/content/drive/MyDrive/AIML_Unscript/AIML Dataset.csv")
+df = pd.read_csv("/content/drive/MyDrive/AIML Dataset.csv")
+
+from google.colab import drive
+drive.mount('/content/drive')
 
 """# Data Preprocessing"""
 
@@ -51,34 +54,6 @@ L3) fraud transactions
 L4) valid transactions
  
 """
-
-def fraud_per_hour(df):
-    l1=[]
-    l2=[]
-    l3=[]
-    l4=[]
-    
-    for h in df["step"].unique():
-        t_df = df.loc[df["step"] == h]
-        l1.append(h)
-        l2.append(t_df.shape[0])
-        l3.append(t_df.loc[t_df["isFraud"] == 1].shape[0])
-        l4.append(t_df.loc[t_df["isFraud"] == 0].shape[0]) # shape[0] -> the no of rows is the number of records 
-        
-    return (l1, l2, l3, l4)
-
-
-l1, l2, l3, l4 = fraud_per_hour(df)
-
-# Create a new DataFrame
-fraud_tx_per_hour = pd.DataFrame()
-
-# Add new Columns to the DataFrame
-fraud_tx_per_hour["houre"] = l1
-fraud_tx_per_hour["total_tx"] = l2
-fraud_tx_per_hour["fraud_tx"] = l3
-fraud_tx_per_hour["valid_tx"] = l4
-fraud_tx_per_hour.head(5)
 
 len(l1)
 #-
@@ -101,31 +76,31 @@ plt.plot(l4)
 def get_day_data(df):
     day = []
     val = 1
-    for i in df["houre"]:
+    for i in df["hour"]:
         day.append(val)
         if i % 24 == 0:
             val += 1
     return day
 
-day = get_day_data(fraud_tx_per_houre)
+day = get_day_data(fraud_tx_per_hour)
 
-fraud_tx_per_houre["day"] = day
-fraud_tx_per_houre
+fraud_tx_per_hour["day"] = day
+fraud_tx_per_hour
 
 def plot_tx_per_day(df, day_num):
     fig, axes = plt.subplots(3, 1, figsize=(10, 20))
     axes[0].set_title(f"day - {day_num}")
-    sns.barplot(x="houre", y="total_tx", data=df, ax=axes[0])
-    sns.barplot(x="houre", y="fraud_tx", data=df, ax=axes[1])
-    sns.barplot(x="houre", y="valid_tx", data=df, ax=axes[2])
+    sns.barplot(x="hour", y="total_tx", data=df, ax=axes[0])
+    sns.barplot(x="hour", y="fraud_tx", data=df, ax=axes[1])
+    sns.barplot(x="hour", y="valid_tx", data=df, ax=axes[2])
     
-d1 = fraud_tx_per_houre.loc[fraud_tx_per_houre["day"] == 1]
+d1 = fraud_tx_per_hour.loc[fraud_tx_per_hour["day"] == 1]
 plot_tx_per_day(d1, 1)
 
 
 #for all days
 for day in range(1, 32):
-  day_df = fraud_tx_per_houre.loc[fraud_tx_per_houre["day"] == day]
+  day_df = fraud_tx_per_hour.loc[fraud_tx_per_hour["day"] == day]
   plot_tx_per_day(day_df, day)
 
 """## Day wise insight - 
@@ -149,10 +124,43 @@ mid day to late hours maximum valid transaction takes place so a constant patter
 ## Hour wise plot
 """
 
-plt.figure(figsize=(12, 150))
-sns.barplot(y="houre", x="fraud_tx", orient="h", data=fraud_tx_per_houre)
+def fraud_per_hour(df):
+    l1, l2, l3, l4 = [], [], [], []
+    
+    for h in df["step"].unique():
+        t_df = df.loc[df["step"] == h]
+        l1.append(h)
+        l2.append(t_df.shape[0])
+        l3.append(t_df.loc[t_df["isFraud"] == 1].shape[0])
+        l4.append(t_df.loc[t_df["isFraud"] == 0].shape[0])
+        
+    return (l1, l2, l3, l4)
 
-"""# **Final Breakdown- data preprocessing:**
+# getting generated list of Data
+l1, l2, l3, l4 = fraud_per_hour(df)
+
+# Create a new DataFrame
+fraud_tx_per_hour = pd.DataFrame()
+
+# Add new Columns to the DataFrame
+fraud_tx_per_hour["houre"] = l1
+fraud_tx_per_hour["total_tx"] = l2
+fraud_tx_per_hour["fraud_tx"] = l3
+fraud_tx_per_hour["valid_tx"] = l4
+fraud_tx_per_hour
+
+plt.figure(figsize=(12, 150))
+sns.barplot(y="houre", x="fraud_tx", orient="h", data=fraud_tx_per_hour)
+
+fraud_tx_per_hour["fraud_tx"].describe()
+
+"""## Visualization Insights
+1. Fraud are low corelated to time
+2. CASH_OUT outweighs the number of TRANSFER in normal transactions
+3. In fraudulent transactions the number of CASH_OUT and Transfer is same.  
+4. error in transaction(new col) is best parameter
+
+# **Final Breakdown- data preprocessing:**
 
 ### Preprocesssing & Feature Engeenering
 
@@ -163,8 +171,6 @@ sns.barplot(y="houre", x="fraud_tx", orient="h", data=fraud_tx_per_houre)
 
 
 ---
-
-
 """
 
 fraudTransactions = df.loc[df.isFraud == 1].type.drop_duplicates().values 
@@ -213,11 +219,15 @@ dfTransactions['errorbalanceOrig'] = dfTransactions.newbalanceOrig + dfTransacti
 
 dfTransactions.head()
 
+"""### **Model Charecteristics**"""
+
 dfTransactions = dfTransactions.drop( ['nameOrig', 'nameDest', 'isFlaggedFraud'], axis = 1)
 
 dfTransactions.head()
 
 list(dfTransactions)
+
+"""### Model training"""
 
 randomState = 5
 np.random.seed(randomState)
@@ -226,6 +236,8 @@ trainX, testX, trainY, testY = train_test_split(dfTransactions, dfFraud, test_si
 weights = (dfFraud == 0).sum() / (1.0 * (dfFraud == 1).sum()) 
 classifier = XGBClassifier(max_depth = 3, scale_pos_weight = weights, n_jobs = 4)
 predictions = classifier.fit(trainX, trainY).predict_proba(testX)
+
+"""### Model Validation"""
 
 from sklearn.metrics import average_precision_score
 AURPC = average_precision_score(testY, predictions[:, 1])
@@ -273,20 +285,6 @@ plt.gcf().axes[0].tick_params(color='white')
 plt.gcf().axes[1].tick_params(color='white')
 plt.gcf().set_size_inches(10,6)
 plt.show()
-
-
-
-"""### **Model Charecteristics**"""
-
-
-
-"""### Model training"""
-
-
-
-"""### Model Validation"""
-
-
 
 """# References:
 
