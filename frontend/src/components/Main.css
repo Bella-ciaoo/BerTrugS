@@ -1,81 +1,102 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
-.main{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #000;
-    background-size: contain;
-    position: fixed;
-    top: 0%;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  background-size: contain;
+  position: fixed;
+  top: 0%;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
 }
 
-.transaction{
-    position: absolute;
-    top: 20%;
-    left: 10%;
-    padding: 10px;
-    width: 100%;
-
+.transaction {
+  position: absolute;
+  top: 13%;
+  left: 10%;
+  padding: 10px;
+  width: 100%;
 }
 
-.heading{
-    font-size: 3em;
+.heading {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+input {
+  background: rgba(0, 0, 0, 0);
+  padding: 10px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 1em;
+}
+
+.submit {
+  padding: 10px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  cursor: pointer;
+  position: relative;
+  left: 10%;
+  top: 54%;
+}
+
+.fetched {
+  position: absolute;
+  top: 37%;
+  left: 9%;
+  padding: 20px;
+  width: 100%;
+}
+
+.fetched-title{
+    font-size: 1.5em;
     font-weight: bold;
 }
 
-input{
-    background: rgba(0, 0, 0, 0);
-    padding: 10px;
-    border: 2px solid #fff;
-    border-radius: 15px;
-    color: #fff;
-    font-size: 1em;
+.output_fields {
+  width: 50%;
 }
 
-.submit
-{
-    padding: 10px;
-    border: 2px solid #fff;
-    border-radius: 15px;
-    color: rgb(255, 255, 255);
-    font-size: 1em;
-    cursor: pointer;
-    position: relative;
-    left: 10%;
-    top:54%
-
+.card {
+  width: 220px;
+  border-radius: 20px;
+  background-color: rgb(46, 45, 45);
 }
 
-.fetched{
-    position: absolute;
-    top: 50%;
-    left: 9%;
-    padding: 20px;
-    width: 100%;
+.chart {
+  position: absolute;
+  right: 10%;
+  padding: 30px;
+  top:15%;
+  /* align-items: center; */
 }
 
-.output_fields{
-    width: 50%;
+
+.fraud {
+  padding: 30px;
+  border-radius: 20px;
+  border: 2px solid;
+  display: flex;
+  align-content: center;
+  border-color:var(--color);
 }
 
-.card{
-    width:220px;
-    border-radius: 20px;
-    background-color: rgb(46, 45, 45);
-
+.fraud-title {
+  color: rgb(255, 255, 255);
+  text-align: center;
 }
 
-.chart{
-    position: absolute;
-    right:10%;
-    padding: 30px;
+.inner-content{
     border-radius: 20px;
     border: rgb(46, 45, 45) 2px solid;
-    top:30%
+    padding: 30px;
 }

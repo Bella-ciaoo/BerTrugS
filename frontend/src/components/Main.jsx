@@ -3,31 +3,50 @@ import img from "./images/Logo.svg";
 import { Link } from "react-router-dom";
 import "./Main.css";
 import { CircularProgressBar } from "@tomik23/react-circular-progress-bar";
+import { useState, useEffect } from "react";
+import FeatherIcon  from 'feather-icons-react'
 
-const props = {
-  percent: 90, 
-  colorSlice: "#00a1ff",
-  fontColor: "#365b74",
-  fontSize: "1.6rem",
-  fontWeight: 400,
-  size: 200,
-  stroke: 10,
-  strokeBottom: 5,
-  speed: 60,
-  cut: 0,
-  rotation: -90,
-  opacity: 10,
-  fill: "#00897B",
-  unit: "%",
-  textPosition: "0.35em",
-  animationOff: false,
-  inverse: false,
-  round: false,
-  number: true,
-  linearGradient: ["#52BBA5", "#00897B"],
-};
 
 const Main = () => {
+
+  const props = {
+    percent: 40,
+    colorSlice: "#00a1ff",
+    fontColor: "#365b74",
+    fontSize: "1.6rem",
+    fontWeight: 400,
+    size: 160,
+    stroke: 10,
+    strokeBottom: 5,
+    speed: 60,
+    cut: 0,
+    rotation: -90,
+    opacity: 10,
+    fill: "#00897B",
+    unit: "%",
+    textPosition: "0.35em",
+    animationOff: false,
+    inverse: false,
+    round: false,
+    number: true,
+    linearGradient: ["#52BBA5", "#00897B"],
+  };
+
+  const [fraud, setFraud] = useState("No fraud detected");
+  const [safe, setSafe] = useState("Safe");
+  const [icon , setIcon] = useState("check-circle");
+  const [color, setColor] = useState("#00a1ff");
+
+
+  useEffect(() => {
+    if (props.percent >= 50) {
+      setFraud("Fraud detected");
+      setSafe("Unsafe");
+      setColor("red");
+      setIcon("x-circle");
+    }
+  }, [props.percent]);
+
   return (
     <div>
       <div className="main">
@@ -62,7 +81,7 @@ const Main = () => {
                 <br />
               </div>
               <div className="fetched">
-                <h2>
+                <h2 className="fetched-title">
                   <span>Fetched Details</span>
                 </h2>
                 <div className=" output_fields">
@@ -95,16 +114,59 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
+                  <br />
+                  <div className="container">
+                    <div className="row">
+                      <div className="col">
+                        <div className="card">
+                          <div className="card-body">Field 1</div>
+                        </div>
+                      </div>
+                      <div className="col">
+                        <div className="card">
+                          <div className="card-body">Field 1</div>
+                        </div>
+                      </div>
+                      <br />
+                      <div className="w-100">
+                        {" "}
+                        <br />
+                      </div>
+                      <div className="col">
+                        <div className="card">
+                          <div className="card-body">Field 1</div>
+                        </div>
+                      </div>
+                      <div className="col">
+                        <div className="card">
+                          <div className="card-body">Field 1</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="chart">
-                <div className="container">
-                  <CircularProgressBar {...props} />
-                  <div className="row">
-                    <div className="col" style={{ width: "200px" }}>
-                      Content to be displayed Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+              <div className="container" style={{ alignItems: "center" }}>
+                <div className="chart">
+                  <div className="fraud">
+                    <h5 className="fraud-title">
+                      <FeatherIcon icon={icon} size="30" color={color} />
+                      <br/>
+                        {fraud}
+                    </h5>
+                  </div>
+                  <br />
+                  <div className="container inner-content">
+                    <div className="row ">
+                      <div
+                        className="col "
+                        style={{ width: "200px", textAlign: "center" }}
+                      >
+                        <h3>{safe}</h3>
+                        <h4>Confidence:</h4>
+                      </div>
                     </div>
+                    <CircularProgressBar {...props} />
                   </div>
                 </div>
               </div>

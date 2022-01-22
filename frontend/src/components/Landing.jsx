@@ -26,19 +26,17 @@ const Landing = () => {
             <div className="col-md-6">
               <div className="description">
                 <h1 className="title">
-                  <span>Title</span>
+                  <span>BeTrugs</span>
                 </h1>
                 <p1 className="subtitle">
                   <span>
                     <Typical
                       steps={[
-                        "Hrithik Purwar",
+                        "Detect Frauds",
                         1200,
-                        "Khushboo Nijhawan",
+                        "Keep transactions safe",
                         1200,
-                        "Aman Ali Siddiqui",
-                        1200,
-                        "Ved Purohit",
+                        "Maintain your trust",
                         1200,
                       ]}
                       loop={Infinity}
