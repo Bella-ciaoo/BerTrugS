@@ -1,5 +1,6 @@
 
-<h1 align="center"> BeTrugS :technologist:</h1>
+<h1 align="center"> BeTrugS 🕵🏻‍♀️ </h1>
+
 
 
 
@@ -10,13 +11,13 @@ BeTrugs is an application which is used for the detection and forecatsing of fra
 <h3 align="center"><a href=" "><img src="https://user-images.githubusercontent.com/72293452/150656332-208cd0df-faa7-43d4-84e4-97fab0f2d81e.png"></a><h3>
 <br>
   
-## Framework:
+## Framework :technologist: :
 
 ### Frontend:
 
-React JS
+- React JS
 
-### Machine Learning(libraries)- 
+### Machine Learning(libraries):
 
 - XGBoost
 
@@ -30,7 +31,7 @@ React JS
 
 - Matplotlib
 
-## How it works:
+## How it works📃:
 
 At first a manual insight is taken on the which attributes will be taken into consideration i.e the data from the dataset is cleaned/classified. The data is proccessed and a model is trained based on the data such that the percentage of the chance of a fradulent transaction is returned.
 
