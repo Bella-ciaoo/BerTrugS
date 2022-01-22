@@ -30,7 +30,15 @@ BeTrugs is an application which is used for the detection and forecatsing of fra
 - Seaborn
 
 - Matplotlib
+	
+### Backend:
+	
+- Flask
+	
+### Deployment:
 
+- Azure
+	
 ## How it works📃:
 
 At first a manual insight is taken on the which attributes will be taken into consideration i.e the data from the dataset is cleaned/classified. The data is proccessed and a model is trained based on the data such that the percentage of the chance of a fradulent transaction is returned.
