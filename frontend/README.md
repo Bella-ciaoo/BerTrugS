@@ -4,15 +4,21 @@ BeTrugs is a web based application which is used for fraud detection.
 
 ## Framework:
 
-Frontend: React JS
+### Frontend:
 
-Backend(libraries)- 
+React JS
 
-XGBoost
+### Machine Learning(libraries)- 
 
-Sklearn
-Numpy
-Pandas
-Seaborn
-Matplotlib
+- XGBoost
+
+- Sklearn
+
+- Numpy
+
+- Pandas
+
+- Seaborn
+
+- Matplotlib
 
