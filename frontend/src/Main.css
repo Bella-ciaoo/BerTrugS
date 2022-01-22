@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    background-size: contain;
+    position: fixed;
+    top: 0%;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+}
+
+.transaction{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    padding: 10px;
+    width: 100%;
+
+}
+
+.heading{
+    font-size: 3em;
+    font-weight: bold;
+}
+
+input{
+    background: rgba(0, 0, 0, 0);
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 1em;
+}
+
+.submit
+{
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    font-size: 1em;
+    cursor: pointer;
+    position: relative;
+    left: 10%;
+    top:54%
+
+}
+
+.fetched{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    padding: 10px;
+    width: 100%;
+}
+
+.output_fields{
+    width: 100%;
+}
+
+.card{
+    width:220px;
+    border-radius: 20px;
+    background-color: rgb(46, 45, 45);
+
+
+}
