@@ -35,7 +35,13 @@ BeTrugs is an application which is used for the detection and forecatsing of fra
 
 At first a manual insight is taken on the which attributes will be taken into consideration i.e the data from the dataset is cleaned/classified. The data is proccessed and a model is trained based on the data such that the percentage of the chance of a fradulent transaction is returned.
 
+## Suggested Steps to prevent fraudulent transactions :
+- Regular Security Upgrades in financial systems
+- Block Suspicious IP addresses
+- Notify User when a transaction seems sceptical
+- Add biometric confirmation (eg-fingerprint) before transfer 
 
+- Use blockchain to avoid anonymity 
 
 ## Colab Notebook link
 https://colab.research.google.com/drive/14S8Wk0wYyZDTIakCdSZ0Bjj8qyv6rPkQ?usp=sharing
