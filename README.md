@@ -45,7 +45,7 @@ https://colab.research.google.com/drive/1nto_-SrffLq06DvogqvsBUL6EDF33AeA?usp=sh
 ## Contributors
   - [Aman Ali Siddiqui](https://github.com/a-ma-n)
   - [Hrithik Purwar](https://github.com/hrithikpurwar)
-  - [Ved Purohit](https://github.com/ved256)
+  - [Ved Purohit](https://github.com/ved2572002)
   - [Khushboo Nijhawan](https://github.com/KhushbooNijhawan)
 - ---
   <p align="center">
