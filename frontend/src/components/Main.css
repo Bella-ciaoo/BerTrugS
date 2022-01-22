@@ -55,13 +55,13 @@ input{
 .fetched{
     position: absolute;
     top: 50%;
-    left: 10%;
-    padding: 10px;
+    left: 9%;
+    padding: 20px;
     width: 100%;
 }
 
 .output_fields{
-    width: 100%;
+    width: 50%;
 }
 
 .card{
@@ -69,5 +69,13 @@ input{
     border-radius: 20px;
     background-color: rgb(46, 45, 45);
 
+}
 
+.chart{
+    position: absolute;
+    right:10%;
+    padding: 30px;
+    border-radius: 20px;
+    border: rgb(46, 45, 45) 2px solid;
+    top:30%
 }
