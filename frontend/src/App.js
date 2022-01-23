@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
+  console.log("test")
   return (
     <div className="App">
       <Router>
