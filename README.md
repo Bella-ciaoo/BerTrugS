@@ -57,6 +57,9 @@ https://colab.research.google.com/drive/14S8Wk0wYyZDTIakCdSZ0Bjj8qyv6rPkQ?usp=sh
 ## Rough Notebook
 https://colab.research.google.com/drive/1nto_-SrffLq06DvogqvsBUL6EDF33AeA?usp=sharing
 
+## Presentation
+https://docs.google.com/presentation/d/16mXcSJu_MH01vw8Z5rDBK-2ORdENfaOrRBvfnaisJ9o/edit?usp=sharing
+
 ## Contributors
   - [Aman Ali Siddiqui](https://github.com/a-ma-n)
   - [Hrithik Purwar](https://github.com/hrithikpurwar)
