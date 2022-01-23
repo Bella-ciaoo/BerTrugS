@@ -17,16 +17,15 @@ const Landing = () => {
             <div className="navbar-links">
               <Link to="/">Home</Link>
               {"  "}
-              <Link to="/about">About Us</Link>
-              {"  "}
-              <Link to="/howitworks">How it works</Link>
+              {/* <Link to="/aboutus">About Us</Link>
+              {"  "} */}
             </div>
           </div>
           <div className="row">
             <div className="col-md-6">
               <div className="description">
                 <h1 className="title">
-                  <span>BeTrugs</span>
+                  <span>BeTrugS</span>
                 </h1>
                 <p1 className="subtitle">
                   <span>
@@ -46,7 +45,7 @@ const Landing = () => {
               </div>
               <div className="get_started">
                 <Link to="/main">
-                  <button className="button" >
+                  <button className="button">
                     <span>Get started</span>
                   </button>
                 </Link>

@@ -3,14 +3,39 @@ import img from "./images/Logo.svg";
 import { Link } from "react-router-dom";
 import "./Main.css";
 import { CircularProgressBar } from "@tomik23/react-circular-progress-bar";
-import { useState, useEffect } from "react";
-import FeatherIcon  from 'feather-icons-react'
-
+import { useState, useEffect, useRef } from "react";
+import FeatherIcon from "feather-icons-react";
+import axios from "axios";
 
 const Main = () => {
+  const [data, setData] = useState([]);
+  const [percentage, setPercentage] = useState(0);
+  let idRef = useRef();
+  let handleSubmit = async (e) => {
+    let id = idRef.current.value;
+    console.log(id);
+    e.preventDefault();
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept",
+      },
+    };
+    await axios
+      .post("https://betrugz.azurewebsites.net/", {
+        id: id,
+      })
+      .then((res) => {
+        setPercentage(res.data.probability);
+        setData(res.data.other_details);
+      });
+
+    console.log(data);
+  };
 
   const props = {
-    percent: 40,
+    percent: percentage,
     colorSlice: "#00a1ff",
     fontColor: "#365b74",
     fontSize: "1.6rem",
@@ -27,16 +52,16 @@ const Main = () => {
     textPosition: "0.35em",
     animationOff: false,
     inverse: false,
-    round: false,
+    round: true,
     number: true,
     linearGradient: ["#52BBA5", "#00897B"],
   };
 
-  const [fraud, setFraud] = useState("No fraud detected");
-  const [safe, setSafe] = useState("Safe");
-  const [icon , setIcon] = useState("check-circle");
-  const [color, setColor] = useState("#00a1ff");
-
+  const [fraud, setFraud] = useState("");
+  const [safe, setSafe] = useState("");
+  const [icon, setIcon] = useState("");
+  const [color, setColor] = useState("green");
+  const [loading, setLoading] = useState("");
 
   useEffect(() => {
     if (props.percent >= 50) {
@@ -44,8 +69,19 @@ const Main = () => {
       setSafe("Unsafe");
       setColor("red");
       setIcon("x-circle");
+    } else {
+      setFraud("No fraud detected");
+      setSafe("Safe");
+      setColor("green");
+      setIcon("check-circle");
     }
   }, [props.percent]);
+
+  useEffect(() => {
+    if (data === undefined) {
+      setLoading("Loading...");
+    }
+  }, [data]);
 
   return (
     <div>
@@ -58,22 +94,29 @@ const Main = () => {
             <div className="navbar-links">
               <Link to="/">Home</Link>
               {"  "}
-              <Link to="/about">About Us</Link>
-              {"  "}
-              <Link to="/howitworks">How it works</Link>
+              {/* <Link to="/aboutus">About Us</Link>
+              {"  "} */}
             </div>
           </div>
           <div className="row">
             <div className="col-md-6">
               <div className="transaction">
                 <h1 className="heading">
-                  <span>Heading</span>
+                  <span>Enter the Transaction id</span>
                 </h1>
                 <br />
                 <div className="input">
                   <form action="">
-                    <input type="text" placeholder="Enter the transaction id" />{" "}
-                    <button className="button submit" type="submit">
+                    <input
+                      ref={idRef}
+                      type="text"
+                      placeholder="Enter the transaction id"
+                    />{" "}
+                    <button
+                      className="button submit"
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
                       <span>Submit</span>
                     </button>
                   </form>
@@ -82,68 +125,27 @@ const Main = () => {
               </div>
               <div className="fetched">
                 <h2 className="fetched-title">
-                  <span>Fetched Details</span>
+                  <span>Transaction Details</span>
                 </h2>
                 <div className=" output_fields">
                   <div className="container">
                     <div className="row">
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
+                      {data.map((item) => (
+                        <div className="col">
+                          <div className="card">
+                            <div className="card-body">{item}</div>
+                          </div>
+                          <br />
                         </div>
-                      </div>
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
-                      </div>
+                      ))}
                       <br />
                       <div className="w-100">
                         {" "}
                         <br />
-                      </div>
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
-                      </div>
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
                       </div>
                     </div>
                   </div>
                   <br />
-                  <div className="container">
-                    <div className="row">
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
-                      </div>
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
-                      </div>
-                      <br />
-                      <div className="w-100">
-                        {" "}
-                        <br />
-                      </div>
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
-                      </div>
-                      <div className="col">
-                        <div className="card">
-                          <div className="card-body">Field 1</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="container" style={{ alignItems: "center" }}>
@@ -151,8 +153,8 @@ const Main = () => {
                   <div className="fraud">
                     <h5 className="fraud-title">
                       <FeatherIcon icon={icon} size="30" color={color} />
-                      <br/>
-                        {fraud}
+                      <br />
+                      {fraud}
                     </h5>
                   </div>
                   <br />
